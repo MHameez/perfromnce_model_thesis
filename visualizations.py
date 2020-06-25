@@ -27,13 +27,13 @@ def remove_duplicates(data):
        'D8', 'D9', 'D10', 'D12(Small), D13(Medium)', 'D14', 'D15', 'D16'])
     return data
 
-#Train-test split
-#structured_data =  get_structured_data(data, "mean_rt")
-structured_data =  get_structured_data(data, "cumulative_moving_avg_rt")
+#Train-test split (coose between fixed mean or moving mean responce time)
+structured_data =  get_structured_data(data, "mean_rt")
+#structured_data =  get_structured_data(data, "cumulative_moving_avg_rt")
 
 corrmat = structured_data.corr()
 top_corr_features = corrmat.index
-plt.figure(figsize=(10,10))
+plt.figure(figsize=(12,12))
 #plot heat map
-g=sns.heatmap(structured_data[top_corr_features].corr(),annot=True,cmap="RdYlGn")
+g=sns.heatmap(structured_data[top_corr_features].corr(),annot=True,cmap="BuPu",  fmt='.2g')
 plt.show()
