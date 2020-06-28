@@ -1,1 +1,1 @@
-# perfromnce_model_thesis
+# Perfromnce Model for Configurable Cloud Applications
