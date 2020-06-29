@@ -5,7 +5,7 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt 
 import seaborn as sns
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error,r2_score
+from sklearn.metrics import mean_squared_error,r2_score, mean_absolute_error
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 
@@ -79,6 +79,8 @@ rfReg = RandomForestRegressor(n_estimators=bes_n_est, max_features=best_mx_feat)
 rfReg.fit(X_train, y_train)
 y_pred = rfReg.predict(X_test)
 print("R2 score: ",round(r2_score(y_test,y_pred),3))
+print("MSE: ",round(mean_squared_error(y_test,y_pred),3))
+print("MAE: ",round(mean_absolute_error(y_test,y_pred),3))
 
 size_fig = plt.figure(figsize=(16,10))
 plt.plot(size_score.train_size.values*100, size_score.r2_score, '-s', label = "RFR", )

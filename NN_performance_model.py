@@ -138,6 +138,8 @@ model_final.fit(XX_train, yy_train, epochs = 200, validation_split = 0.2, shuffl
 y_pred = model_final.predict(XX_test)
 
 print("The R2 score with ("+str(units)+") neurons is:\t{:0.3f}".format(r2_score(yy_test, y_pred)))
+print("MSE: ", round(mean_squared_error(yy_test, y_pred),3))
+print("MAE: ", round(mean_absolute_error(yy_test, y_pred),3))
 #print("The MSE  is:\t{:0.3f}".format(mean_squared_error(yy_test, y_pred)))
 #Visualize the NN Model layers and dimensions
 # tf.keras.utils.plot_model(

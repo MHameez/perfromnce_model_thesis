@@ -131,6 +131,8 @@ y_pred = mlregr_final.predict(X_test)
 
 print("Model Score: ", round(model_score,2))
 print("R-squared score: ", round(r2_score(y_test,y_pred),3))
+print("MSE: ", round(mean_squared_error(y_test,y_pred),3))
+print("MAE: ", round(mean_absolute_error(y_test,y_pred),3))
 print("Fine tuned Parameters:\n ",mlregr_final.get_params)
 
 #Visualize DTR  model tree
