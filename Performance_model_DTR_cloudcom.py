@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[119]:
 
 
 import pandas as pd
@@ -21,20 +17,10 @@ from IPython.display import Image
 from sklearn.tree import export_graphviz
 import pydotplus
 
-get_ipython().run_line_magic('matplotlib', 'inline')
-
-
-# In[120]:
-
-
 #import data
 data = pd.read_csv('Generated Data/final_data.csv', encoding='utf-8')
 delete_columns = ['Name','fail_count','Median response time','D11','Hatch Rate','Time', 'variant_cost_hr']
 data = data.drop(delete_columns, axis=1)
-
-
-# In[122]:
-
 
 def get_N_samples(choice, structured_data):
     N1_variants = [1,41,42,44,8,11,20,39,46,33,24,31,50,38,12,17,2]
@@ -63,9 +49,6 @@ def get_N_samples(choice, structured_data):
     N4_y = N4.iloc[:, -1]
     
     return X_train, y_train, N4_X, N4_y
-
-
-# In[121]:
 
 
 def get_structured_data(data,label):
@@ -150,9 +133,6 @@ def param_tuningDTR(structured_data):
     return best_params, dept_df, depth
 
 
-# In[66]:
-
-
 def trainsize_gridsearch(structured_data, best_params):
   
     scores = []
@@ -179,18 +159,11 @@ def trainsize_gridsearch(structured_data, best_params):
     
     return size_score
 
-
-# In[111]:
-
-
 best_params, dept_df, depth = param_tuningDTR(structured_data)
 size_score = trainsize_gridsearch(structured_data, best_params)
 best_score = size_score.iloc[size_score['r2_score'].idxmax()]
 best_train_size = str(best_score[0])
-size_score
-
-
-# In[113]:
+print(size_score)
 
 
 X_train, y_train, X_test, y_test = get_N_samplesd(best_train_size, structured_data)
@@ -208,9 +181,6 @@ print("MAE: ", round(mean_absolute_error(y_test, y_pred),2))
 print("RMSE: ", round(mean_squared_error(y_test, y_pred, squared=False),2))
 
 
-# In[117]:
-
-
 plt.figure(figsize=(10,6))
 ax1 = sns.distplot(dept_df['y'], hist=False, color='r', kde_kws={'linewidth':3},  label="Actual Value", )
 
@@ -222,10 +192,6 @@ plt.ylabel("Normalized Range")
 plt.title('Prediction accuracy between tree depth')
 plt.savefig("Generated Data/DTR_depth.png")
 plt.show()
-
-
-# In[ ]:
-
 
 
 

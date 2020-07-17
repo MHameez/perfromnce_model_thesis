@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[105]:
-
-
 import pandas as pd
 import numpy as np
 from sklearn import linear_model
@@ -15,11 +9,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error,r2_score, mean_absolute_error
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
-
-get_ipython().run_line_magic('matplotlib', 'inline')
-
-
-# In[106]:
 
 
 def get_structured_data(data,label):
@@ -34,10 +23,6 @@ def remove_duplicates(data):
     data = data.drop_duplicates(subset=['request category','D1(Small), D2(Medium)', 'D3', 'D4', 'D5(Small)', 'D6(Large)', 'D7',
        'D8', 'D9', 'D10', 'D12(Small), D13(Medium)', 'D14', 'D15', 'D16'])
     return data
-
-
-# In[108]:
-
 
 def get_N_samples(choice, structured_data):
     N1_variants = [1,41,42,44,8,11,20,39,46,33,24,31,50,38,12,17,2]
@@ -97,10 +82,7 @@ def base_RFR(structured_data):
     print('RMSE', mean_squared_error(N4_y,y_pred, squared=False))
     
     
-base_RFR(structured_data)
-
-
-# In[74]:
+print(base_RFR(structured_data))
 
 
 def perfrom_RFR_GridSearch(structured_data, trees, sizes):    
@@ -149,23 +131,11 @@ def perfrom_RFR_GridSearch(structured_data, trees, sizes):
     
     return size_score
 
-
-# In[75]:
-
-
 trees = [100, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000]
 sizes = ['N1','N2','N3']
 size_score = perfrom_RFR_GridSearch(structured_data, trees, sizes)
 
-
-# In[89]:
-
-
-size_score
-
-
-# In[82]:
-
+print(size_score)
 
 best = size_score.iloc[size_score['R-Sqaured'].idxmax()]
 #bes_n_est = int(best[2])
@@ -191,15 +161,7 @@ def get_tree(best_train_size,structured_data,best_mx_feat):
         tree_score = pd.DataFrame(list(zip(r2, n_trees)), columns=['R-Sqaured','No.Trees'])
     return tree_df, tree_score
 tree_df, tree_score = get_tree(best_train_size,structured_data,best_mx_feat)
-
-
-# In[83]:
-
-
 bst_tree = tree_score.iloc[tree_score['R-Sqaured'].idxmax()]
-
-
-# In[86]:
 
 
 plt.figure(figsize=(10,6))
@@ -213,9 +175,6 @@ plt.ylabel("Normalized Range")
 plt.title('Prediction accuracy between number of Trees')
 #plt.savefig("Generated Data/RFR_depth.png")
 plt.show()
-
-
-# In[ ]:
 
 
 

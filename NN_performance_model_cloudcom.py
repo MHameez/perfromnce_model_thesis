@@ -64,7 +64,6 @@ data = data.drop(delete_columns, axis=1)
 structured_data =  get_structured_data(data, "cumulative_moving_avg_rt")
 
 
-
 def deep_layer_neurons(structured_data,sizes):
     #perfroms grid search to find best neurons for hidden layers   
     scores = []
@@ -125,7 +124,7 @@ def deep_layer_neurons(structured_data,sizes):
 
 train_sizes = ['N1','N2','N3']
 units, best_scores, neurons, sizes, all_units = deep_layer_neurons(structured_data, train_sizes)
-best_scores
+print(best_scores)
 
 # #Perform grid search and get optimal params
 # train_sizes = [0.4,0.5]
